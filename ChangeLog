@@ -1,0 +1,224 @@
+2015-06-07  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* build.xml: Updated for 3.0.0.
+	(All related portions are updated)
+
+	* packagesrc/samples: New directory.
+
+	* packagesrc/ddllsg: Abolish.
+
+	* src/org/piax/samples/gtrans/hello/multi/receiver/Main.java,
+	src/org/piax/samples/gtrans/hello/udp/receiver/Main.java): Fix for
+	Java 8.
+
+2015-06-06  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* NEWS: New file.
+
+	* Updated licenses.
+
+	* src/org/piax/AgentConfigValues.java: Moved to src/org/piax/agent
+
+	* src/org/piax/GTransConfigValues.java: Moved to src/org/piax/gtrans
+
+	* src/org/piax/StatusRepo.java: Moved to src/org/piax/common
+
+	* All related portions related to above changes are modified.
+
+	* src/org/piax/samples/gtrans/hello/agent,
+	src/org/piax/samples/gtrans/hello/multi,
+        src/org/piax/samples/gtrans/hello/udp: New samples.
+
+2015-05-23  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/gtrans/szk/Suzaku.java: Renamed from MChordSharp.
+
+	* src/org/piax/gtrans/szk: Renamed from chordsharp.
+
+	* src/org/piax/gtrans/RPCInvoker.java: Experimental channel pooling
+	(off by default).
+
+2015-05-17  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/samples/gtrans/hello/Hello.java: New sample.
+
+	* src/org/piax/gtrans/ring/RingVNode.java: Search for the insert point
+	if insertion failed.
+
+2015-03-19  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/agent/DefaultAgentTransportManager.java
+	(baseTransport,	newBaseChannelTransport
+	 getBaseChannelTransport): Moved from DefaultAgentTransportManager.java
+
+	* src/org/piax/agent/AgentTransportManager.java
+	(baseTransport,	newBaseChannelTransport
+	 getBaseChannelTransport): Moved to DefaultAgentTransportManager.java
+
+	* src/org/piax/agent/DefaultAgentTransportManager.java
+	(newBaseChannelTransport): Implemented.
+	(newRPCTransport): Ditto.
+	(setupOverlays): Ditto.
+
+	* src/org/piax/agent/AgentTransportManager.java(baseTransport,
+	rpcTransport): New fields.
+	(newBaseChannelTransport): New abstract method.
+	(getBaseChannelTransport): New method.
+	(newRPCTransport): New abstract method.
+	(getRPCTransport): Simplified.
+	(setupOverlays): Redefine as an abstract method.
+
+2015-03-15  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/gtrans/ring/RingVNode.java
+	(NUMBER_OF_DDLL_RETRY): Changed the value to 100.
+	(addKey): If pos.left is changed, search insert point from it.
+	(addKey): If insertion was failed, retry the insertion after random
+	interval.
+
+	* src/org/piax/gtrans/chordsharp/ChordSharp.java
+	(getValidFTEntries): Ignore null entry.
+
+	* Merged gtrans-extra branch.
+
+2015-03-12  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/gtrans/ring/rq/RQIf.java (findImmedNeighbors):
+	Added 'opts' argument.
+
+	* src/org/piax/gtrans/ring/RingManager.java (find): Ditto.
+	(findImmedNeighbors): Ditto.
+
+	* src/org/piax/gtrans/ring/RingVNode.java (addKey): Follow the changes
+	above.
+
+	* src/org/piax/gtrans/ring/MessagingFramework.java
+	(requestMsgReceived): Don't care about the NO_RESPONSE when
+	RetransMode equals RetransMode.NONE.
+
+	* src/org/piax/gtrans/ring/RequestMessage.java (prepareReceivingReply):
+	Ditto.
+
+	* src/org/piax/gtrans/TransOptions.java (RetransMode): Renamed
+	RECORD_ACK to NONE_ACK.
+
+2015-03-06  Yuuichi Teranishi  <teranisi@piax.org>
+
+        * gtrans/toplevel: Abolish.
+
+        * gtrans/sg/SkipGraph.java
+        (fin): Call SGMessagingFramework#fin.
+
+        * gtrans/sg/RQMessage.java: Moved field 'expire' to SGRequestMessage.
+
+        * gtrans/sg/SGMessagingFramework.java
+        (MSGSTORE_EXPIRATION_TASK_PERIOD): New variable.
+        (SGMessagingFramework): Start timer for removeExpiredFromMsgStore.
+        (removeExpiredFromMsgStore): New method.
+        (fin): Ditto.
+        (SGRequestMessage): Moved field 'expire' from RQMessage.
+
+2015-02-22  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* src/org/piax/test/OverlayTest.java,
+	RetransTest.java, TransportTest.java: Rewrote to follow the changes
+	on toplevel API (abolished).
+
+	* RQManager.java (invokeExecQuery): Fixed serious logic bug when
+	ACCEPT_ONCE.
+
+	* src/org/piax/gtrans/impl/TransportImpl.java: Implemented some
+	argument reduced versions of the methods.
+
+	* src/org/piax/gtrans/impl/TransportImpl.java (setDefaultAppId,
+	getDefaultAppId): New methods.
+
+	* src/org/piax/gtrans/impl/RequestTransportImpl.java: Implemented some
+	argument reduced versions of the methods.
+
+	* src/org/piax/gtrans/impl/OverlayImpl.java (request): Try to parse
+	dstExp string as DCL when failed to parse as Destination.
+
+	* src/org/piax/gtrans/impl/OverlayImpl.java: Implemented some
+	argument reduced versions of the methods.
+
+	* src/org/piax/gtrans/chordsharp/MChordSharp.java:
+	(onReceiveRequest): Don't use lower transport on calling onReceive.
+
+	* src/org/piax/gtrans/sg/MSkipGraph.java: Ditto.
+
+	* src/org/piax/gtrans/toplevel: Abolish.
+
+	* src/org/piax/gtrans/Transport.java: Rewrote comments in English.
+	Added some reduced argument versions of the methods.
+
+	* src/org/piax/gtrans/RequestTransport.java: Added some reduced 
+	versions of request.
+
+	* src/org/piax/gtrans/OverlayListener.java: Extend
+	TransportListener instead of RequestTransportListener (To reduce
+	unused implementations).
+
+	* src/org/piax/gtrans/Overlay.java(singletonFutureQueue): New method
+	for utility.
+
+	* src/org/piax/gtrans/Overlay.java: Added some reduced versions of send
+	, request, addKey and removeKey.
+
+	* src/org/piax/gtrans/FutureQueue.java:
+	(FutureQueue#singletoneQueue#getAll,
+	 FutureQueue#singletoneQueue#getAllValues): New method for utility.
+
+	* Channel.java, ChannelListener, FutureQueue.java, OverlayListener.java
+	RequestTransportListener.java, BaseChannelTransportImpl.java,
+	BaseDatagramTransport.java, ChannelImpl.java, ChannelTransportImpl.java,
+	OneToOneMappingTransport.java: Imported from gtrans-rc2.
+
+2015-02-19  Yuuichi Teranishi  <teranisi@piax.org>
+
+	* TransOptions.java (RetransMode.RECORD_ACK): New mode.
+
+	* ChordSharp.java (ChordSharp#rqDisseminate0): Fixed logic for
+	ResponseType.NO_RESPONSE.
+
+	* RQManager.java (RQManager#rqDisseminate0): Ditto.
+
+	* MessagingFramework.java (MessagingFramework#requestMsgReceived):
+	Don't send ack when RetransMode is NONE.
+
+	* RequestMessage.java (RequestMessage#prepareReceivingReply):
+	Don't wait for ack when RetransMode is NONE.
+	(responseReceived): Fixed logic for ResponseType.NO_RESPONSE.
+	(mayReceiveReply): Ditto.
+
+	* RQMessage.java (RQMessage#onReceivingReply): Fixed logic for
+	ResponseType.NO_RESPONSE.
+
+	* ChordSharp.java (ChordSharp#scheduleFingerTableUpdate): New method.
+
+	* MChordSharp.java (MChordSharp#scheduleFingerTableUpdate): New method.
+
+	* ChordSharpVNode.java (ChordSharpVNode#scheduleFTUpdate(int, int)):
+	New method.
+	(scheduleFTUpdate(boolean)): Use it.
+
+	* MessagingFramework.java (MessagingFramework#requestMsgReceived):
+	Send ack only
+	when RetransMode is FAST or RELIABLE if ResponseType is NO_RESPONSE.
+
+	* RequestMessage.java (RequestMessage#RequestMessage):
+	No need to use replyTo if ResponseType is NO_RESPONSE.
+
+	* RQReturn.java (RQReturn#RQReturn): Flush task is not needed if
+	ResponseType is	NO_RESPONSE.
+	(RQReturn#flush): Do nothing when ResponseType is NO_RESPONSE.
+	(RQReturn#isCompleted): If ResponseType is NO_RESPONSE, complated
+	immediately.
+	(RQReturn#retransmit): Reverted log level.
+
+	* RetransTest.java: Adding some tests (halfway).
+
+2015-01-04  Yuuichi Teranishi  <teranisi@piax.org>
+
+        * GTransConfigValues.java, AgentConfigValues.java, StatusRepo.java:
+        Updated copyright and license lines.
