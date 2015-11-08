@@ -206,7 +206,7 @@ public class RowData implements Key {
             boolean useIndex) throws IllegalArgumentException,
             IncompatibleTypeException {
         if (name == null || value == null) {
-            throw new IllegalArgumentException("nama and value should not be null");
+            throw new IllegalArgumentException("name and value should not be null");
         }
         // Overlayとの間の変換ミスが生じるため、WrappedKeyは許可しない
         if (value instanceof WrappedComparableKey) {
