@@ -181,7 +181,7 @@ public class AgentPeer {
 
         try {
             ctr = transportManager.getRPCTransport();
-            home = new AgentHomeImpl(this, ctr, agClassPath);
+            home = new AgentHomeImpl(this, ctr, parentAgentLoader, agClassPath);
             transportManager.setupOverlays(home);
         } catch (Exception e) {
             if (ctr != null) {
