@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PIAX-Agent" default="help" basedir=".">
+    <path id="classpath">
+        <pathelement path="."/>
+        <fileset dir="${basedir}/lib" includes="**/*.jar" />
+    </path>
+
+    <!-- Initialization target -->
+    <target name="-init">
+        <property name="Name" value="PIAX-Agent Build"/>
+        <property name="debug" value="true"/>
+        <property name="optimize" value="true"/>
+        <property name="deprecation" value="false"/>
+        <property name="use-zip-dist" value="false"/>
+
+        <!-- Directory Definitions -->
+        <property name="lib.dir" value="${basedir}/lib"/>
+        <property name="src.dir" value="${basedir}/src"/>
+        <property name="build.dir" value="${basedir}/build"/>
+        <property name="jarfile" value="piax-3.0.0.jar"/>
+    </target>
+
+
+    <target name="help" depends="-init">
+        <echo message="Avalable target : make-jar, compile, clean"/>
+    </target>
+
+    <!-- Prepares the build directory -->
+    <target name="-prepare-build" depends="-init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="-prepare-build">
+        <javac srcdir="${src.dir}"
+               destdir="${build.dir}"
+               excludes="**/*.class,**/test/**,**/*~,**/.*"
+               debug="${debug}"
+               encoding="UTF8"
+               optimize="${optimize}"
+               deprecation="${deprecation}"
+               classpathref="classpath"
+        />
+    </target>
+
+    <target name="make-jar" depends="compile">
+        <jar jarfile="${jarfile}">
+            <fileset dir="${build.dir}">
+                <include name="**/*.class" />
+                <exclude name="**/test/**" />
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="clean" depends="-init" description="Clean all build products.">
+        <delete dir="${build.dir}"/>
+    </target>
+</project>
