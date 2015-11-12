@@ -17,7 +17,7 @@
         <property name="lib.dir" value="${basedir}/lib"/>
         <property name="src.dir" value="${basedir}/src"/>
         <property name="build.dir" value="${basedir}/build"/>
-        <property name="jarfile" value="piax-3.0.0.jar"/>
+        <property name="jarfile" value="piax-sna-without-bluetooth-3.0.0.jar"/>
     </target>
 
 
