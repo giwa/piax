@@ -39,7 +39,7 @@ import org.piax.common.ObjectId;
 import org.piax.common.PeerId;
 import org.piax.common.TransportId;
 import org.piax.gtrans.raw.InetLocator;
-import org.piax.gtrans.raw.bluetooth.BluetoothLocator;
+// import org.piax.gtrans.raw.bluetooth.BluetoothLocator;
 import org.piax.gtrans.raw.emu.EmuLocator;
 import org.piax.gtrans.raw.tcp.TcpLocator;
 import org.piax.gtrans.raw.udp.UdpLocator;
@@ -90,9 +90,9 @@ public class BinaryJsonner {
         else if (obj instanceof EmuLocator) {
             bb.put(emuType).putInt(((EmuLocator) obj).getVPort());
         }
-        else if (obj instanceof BluetoothLocator) {
-            bb.put(btType).put(((BluetoothLocator) obj).getAddr().getBytes());
-        }
+//        else if (obj instanceof BluetoothLocator) {
+//            bb.put(btType).put(((BluetoothLocator) obj).getAddr().getBytes());
+//        }
         else if (obj instanceof PeerId) {
             byte[] v = ((PeerId) obj)._getBytes();
             bb.put(peerIdType).putShort((short) v.length);
@@ -156,11 +156,11 @@ public class BinaryJsonner {
             case emuType:
                 int vport = bbuf.getInt();
                 return new EmuLocator(vport);
-            case btType:
-                byte[] mac = new byte[12];
-                bbuf.get(mac);
-                String macAddr = new String(mac);
-                return new BluetoothLocator(macAddr);
+//            case btType:
+//                byte[] mac = new byte[12];
+//                bbuf.get(mac);
+//                String macAddr = new String(mac);
+//                return new BluetoothLocator(macAddr);
             case peerIdType:
                 int len = bbuf.getShort();
                 byte[] v = new byte[len];

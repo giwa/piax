@@ -27,8 +27,8 @@ import org.piax.gtrans.Peer;
 import org.piax.gtrans.PeerInfo;
 import org.piax.gtrans.base.BaseChannelTransportImpl;
 import org.piax.gtrans.impl.OneToOneMappingTransport;
-import org.piax.gtrans.raw.bluetooth.BluetoothDiscoverer;
-import org.piax.gtrans.raw.bluetooth.BluetoothLocator;
+// import org.piax.gtrans.raw.bluetooth.BluetoothDiscoverer;
+// import org.piax.gtrans.raw.bluetooth.BluetoothLocator;
 import org.piax.gtrans.tsd.TSDDiscoverable;
 
 /**
@@ -59,15 +59,15 @@ public class AdHocTransport<E extends Endpoint> extends
      * @throws IdConflictException
      * @throws IOException
      */
-    @SuppressWarnings("unchecked")
-    public AdHocTransport(Peer peer, TransportId transId)
-            throws IdConflictException, IOException {
-        super(transId, (ChannelTransport<E>) 
-                new BaseChannelTransportImpl<BluetoothLocator>(peer, new TransportId(
-                transId.toString() + "$bt"), BluetoothLocator.getLocal()));
-        rawDiscoverable = (Discoverable<E>) BluetoothDiscoverer.getInstance();
-        isBluetooth = true;
-    }
+//    @SuppressWarnings("unchecked")
+//    public AdHocTransport(Peer peer, TransportId transId)
+//            throws IdConflictException, IOException {
+//        super(transId, (ChannelTransport<E>)
+//                new BaseChannelTransportImpl<BluetoothLocator>(peer, new TransportId(
+//                transId.toString() + "$bt"), BluetoothLocator.getLocal()));
+//        rawDiscoverable = (Discoverable<E>) BluetoothDiscoverer.getInstance();
+//        isBluetooth = true;
+//    }
 
     @Override
     public synchronized void fin() {
